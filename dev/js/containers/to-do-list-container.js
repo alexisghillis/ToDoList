@@ -4,14 +4,15 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {delTask} from '../actions/index';
+import {delTask} from '../actions/index-actions';
+import {changeStatus} from '../actions/index-actions';
 
 class ToDoList extends Component {
 
-    createTableRows(){
+    createTableRows() {
         return this.props.todos.map((task) => {
             return (
-                <tr key = {task.id}>
+                <tr key={task.id}>
                     <td>{task.name}</td>
                     <td>{task.created}</td>
                     <td>{task.modified}</td>
@@ -20,6 +21,11 @@ class ToDoList extends Component {
                     <td>
                         <input type="button" value="X" className="btn btn-primary"
                                onClick={() => this.props.delTask(task)}
+                        />
+                    </td>
+                    <td>
+                        <input type="checkbox"
+                               onClick={() => this.props.changeStatus(task)}
                         />
                     </td>
                 </tr>
@@ -48,13 +54,13 @@ class ToDoList extends Component {
 }
 
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
     return {
         todos: state.todos
     };
 }
-function matchDispatchToProps(dispatch){
-    return bindActionCreators({delTask: delTask}, dispatch);
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({delTask: delTask,changeStatus: changeStatus}, dispatch);
 
 }
-export default connect(mapStateToProps,matchDispatchToProps)(ToDoList);
+export default connect(mapStateToProps, matchDispatchToProps)(ToDoList);

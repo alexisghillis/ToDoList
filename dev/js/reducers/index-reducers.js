@@ -5,10 +5,10 @@
 
 
 import {combineReducers} from 'redux';
-import ToDos from './to-do-list-reducer';
+import deleteToDo from './to-do-list-reducer';
 
 const allReducers = combineReducers({
-    todos: ToDos
+    todos: deleteToDo
 });
 
 export default allReducers;

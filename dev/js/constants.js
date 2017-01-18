@@ -3,4 +3,5 @@
  */
 
 export var DELETE_KEY = 'DEL_TASK';
+export var CHANGE_STATUS_KEY = 'CHANGE_STATUS';
 

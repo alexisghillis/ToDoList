@@ -1,13 +1,20 @@
 
 import {DELETE_KEY} from '../constants.js'
+import {CHANGE_STATUS_KEY} from '../constants.js'
 
-export default function (state=toDos, action) {
+export default function (state=toDos, action){
     switch(action.type) {
 
         case DELETE_KEY:
-            return state.filter(function(el){
+            return state.filter((el)=>{
                 return el.id !== action.payload.id;
             });
+
+        case CHANGE_STATUS_KEY:
+            return state.filter(() => {
+                        return action.payload.status="DONE"
+            });
+
         default:
             return state;
     }

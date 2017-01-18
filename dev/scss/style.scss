@@ -3,3 +3,8 @@ $primary: #006699;
 h2 {
 	color: $primary;
 }
+
+th, td {
+	padding: 15px;
+	text-align: left;
+}
