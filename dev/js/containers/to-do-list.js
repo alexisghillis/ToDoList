@@ -4,21 +4,25 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-//import {addTask} from '../actions/index';
+import {delTask} from '../actions/index';
 
 class ToDoList extends Component {
 
     createTableRows(){
-        return this.props.tasks.map((task) => {
+        return this.props.todos.map((task) => {
             return (
-                <tr>
+                <tr key = {task.id}>
                     <td>{task.name}</td>
                     <td>{task.created}</td>
                     <td>{task.modified}</td>
                     <td>{task.description}</td>
                     <td>{task.status}</td>
+                    <td>
+                        <input type="button" value="X" className="btn btn-primary"
+                               onClick={() => this.props.delTask(task)}
+                        />
+                    </td>
                 </tr>
-
 
             );
         });
@@ -26,7 +30,8 @@ class ToDoList extends Component {
 
     render() {
         return (
-            <table>
+            <table className="table table-hover table-bordered">
+                <tbody>
                 <tr>
                     <th>Name</th>
                     <th>Created</th>
@@ -34,15 +39,22 @@ class ToDoList extends Component {
                     <th>Description</th>
                     <th>Status</th>
                 </tr>
+
                 {this.createTableRows()}
+                </tbody>
             </table>
         );
     }
 }
 
+
 function mapStateToProps(state){
     return {
-        tasks: state.tasks
+        todos: state.todos
     };
 }
-export default connect(mapStateToProps)(ToDoList);
+function matchDispatchToProps(dispatch){
+    return bindActionCreators({delTask: delTask}, dispatch);
+
+}
+export default connect(mapStateToProps,matchDispatchToProps)(ToDoList);

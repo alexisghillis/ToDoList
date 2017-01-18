@@ -5,10 +5,10 @@
 
 
 import {combineReducers} from 'redux';
-import TaskReducer from './task-data';
+import ToDos from './to-do-list-reducer';
 
 const allReducers = combineReducers({
-    tasks: TaskReducer
+    todos: ToDos
 });
 
 export default allReducers;
