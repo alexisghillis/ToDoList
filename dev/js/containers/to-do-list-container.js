@@ -17,7 +17,7 @@ class ToDoList extends Component {
                     <td>{task.created}</td>
                     <td>{task.modified}</td>
                     <td>{task.description}</td>
-                    <td>{task.status}</td>
+                    <td>{task.status ? 'DONE' : 'NOT DONE'}</td>
                     <td>
                         <input type="button" value="X" className="btn btn-primary"
                                onClick={() => this.props.delTask(task)}
@@ -25,6 +25,7 @@ class ToDoList extends Component {
                     </td>
                     <td>
                         <input type="checkbox"
+                               defaultChecked={task.status}
                                onClick={() => this.props.changeStatus(task)}
                         />
                     </td>

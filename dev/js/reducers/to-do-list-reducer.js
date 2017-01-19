@@ -11,8 +11,11 @@ export default function (state=toDos, action){
             });
 
         case CHANGE_STATUS_KEY:
-            return state.filter(() => {
-                        return action.payload.status="DONE"
+            return state.map((el) => {
+                if(el.id === action.payload.id)  {
+                    el.status = !el.status;
+                }
+                return el;
             });
 
         default:
@@ -27,7 +30,7 @@ const toDos =
         "created": "11/27/2016",
         "modified": "11/12/2016",
         "description": "Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.\n\nVestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.",
-        "status": "porta volutpat quam pede"
+        "status": "ceva"
     }, {
         "id": 2,
         "name": "William Gonzales",
