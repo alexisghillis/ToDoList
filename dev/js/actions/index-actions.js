@@ -4,6 +4,8 @@
 
 import {DELETE_KEY} from '../constants.js'
 import {CHANGE_STATUS_KEY} from '../constants.js'
+import {ADD_TASK} from '../constants.js'
+
 
 export const changeStatus = (task) => {
     console.log("Changed status for task named: ", task.name);
@@ -21,6 +23,9 @@ export const delTask = (task) => {
     }
 };
 
-// export const createListObject = () => {
-//     var request =
-// };
+export const createListObject = (task) => {
+    return {
+        type: ADD_TASK,
+        payload: task
+    }
+};

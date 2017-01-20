@@ -4,4 +4,4 @@
 
 export var DELETE_KEY = 'DEL_TASK';
 export var CHANGE_STATUS_KEY = 'CHANGE_STATUS';
-export var SAVE_
+export var ADD_TASK = 'ADD_TASK';
