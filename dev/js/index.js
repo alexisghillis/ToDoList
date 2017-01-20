@@ -6,12 +6,13 @@ import {createStore} from 'redux'
 import allReducers from './reducers/index-reducers';
 import App from './components/to-do-list-component';
 import AddToDo  from './components/add-to-do-component';
-import { Router, Route, Link, browserHistory, IndexRoute,hashHistory  } from 'react-router'
+import { Router, Route, browserHistory } from 'react-router'
+
 const store = createStore(allReducers);
 
 ReactDOM.render(
     <Provider store={store}>
-       <Router history={hashHistory}>
+       <Router history={browserHistory}>
            <Route path="/" component={App}/>
            <Route path="/add" component={AddToDo}/>
        </Router>

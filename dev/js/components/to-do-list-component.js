@@ -3,6 +3,8 @@
  */
 import React from 'react';
 import ToDoList from '../containers/to-do-list-container';
+import { Link } from 'react-router'
+
 require('../../scss/style.scss');
 
 
@@ -14,7 +16,7 @@ class App extends React.Component {
                 <tbody>
                 <tr>
                     <td><h2> To Do List </h2></td>
-                    <td><input type="button" className="btn btn-primary" value="Add To Do"/></td>
+                    <td><Link to="/add"><input type="button" className="btn btn-primary" value="Add To Do" /> </Link> </td>
                 </tr>
                 </tbody>
             </table>

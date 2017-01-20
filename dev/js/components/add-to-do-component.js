@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import { Link } from 'react-router'
 
 class AddToDo extends React.Component {
     render(){
@@ -11,7 +12,7 @@ class AddToDo extends React.Component {
                 <tbody>
                 <tr>
                     <td>
-                        <input type="button" className="btn btn-primary" value="Back"/>
+                        <Link to="/"> <input type="button" className="btn btn-primary" value="Back" /> </Link>
                     </td>
                 </tr>
                 <tr>
@@ -32,7 +33,7 @@ class AddToDo extends React.Component {
                 </tr>
                 <tr>
                     <td>
-                        <input type="button" className="btn btn-primary" value="Cancel"/>
+                        <Link to="/"><input type="button" className="btn btn-primary" value="Cancel"/></Link>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="button" className="btn btn-primary" value="Save"/>
                     </td>
