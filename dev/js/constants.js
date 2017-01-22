@@ -5,3 +5,4 @@
 export var DELETE_KEY = 'DEL_TASK';
 export var CHANGE_STATUS_KEY = 'CHANGE_STATUS';
 export var ADD_TASK = 'ADD_TASK';
+export var add2doClasses = ["input.form-control","textarea.form-control"];

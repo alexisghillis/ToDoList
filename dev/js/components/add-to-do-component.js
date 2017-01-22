@@ -4,6 +4,7 @@
 
 import React from 'react';
 import { Link } from 'react-router'
+import {addTask} from '../actions/index-actions';
 
 class AddToDo extends React.Component {
     render(){
@@ -35,7 +36,8 @@ class AddToDo extends React.Component {
                     <td>
                         <Link to="/"><input type="button" className="btn btn-primary" value="Cancel"/></Link>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="button" className="btn btn-primary" value="Save"/>
+                        <input type="button" className="btn btn-primary" value="Save"
+                               onClick={() =>{addTask()}} />
                     </td>
                 </tr>
                 </tbody>

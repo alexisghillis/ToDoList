@@ -1,29 +1,34 @@
-
 import {DELETE_KEY} from '../constants.js'
 import {CHANGE_STATUS_KEY} from '../constants.js'
+import {ADD_TASK} from '../constants.js'
 
-export default function (state=toDos, action){
-    switch(action.type) {
+export default function (state = tasks, action) {
+    switch (action.type) {
 
         case DELETE_KEY:
-            return state.filter((el)=>{
+            return state.filter((el) => {
                 return el.id !== action.payload.id;
             });
 
         case CHANGE_STATUS_KEY:
             return state.map((el) => {
-                if(el.id === action.payload.id)  {
+                if (el.id === action.payload.id) {
                     el.status = !el.status;
                 }
                 return el;
             });
-
+        case ADD_TASK:
+            console.log(action.payload);
+            return () => {
+                Object.assign({}, state.push(action.payload));
+            };
         default:
             return state;
     }
 }
 
-const toDos =
+
+    const tasks =
     [{
         "id": 1,
         "name": "Alice Williams",
