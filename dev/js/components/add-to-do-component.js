@@ -6,6 +6,7 @@ import React from 'react';
 import { Link } from 'react-router'
 import {addTask} from '../actions/index-actions';
 
+//-----TO DO
 class AddToDo extends React.Component {
     render(){
         return (

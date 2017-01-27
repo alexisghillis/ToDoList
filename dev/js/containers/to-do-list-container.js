@@ -4,64 +4,24 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {delTask} from '../actions/index-actions';
-import {changeStatus} from '../actions/index-actions';
+import ToDoList from '../components/to-do-list'
+import {fetchTasks, fetchTasksSuccess, fetchTasksFailure} from '../actions/index-actions'
 
-class ToDoList extends Component {
-
-    createTableRows() {
-        return this.props.todos.map((task) => {
-            return (
-                <tr key={task.id}>
-                    <td>{task.name}</td>
-                    <td>{task.created}</td>
-                    <td>{task.modified}</td>
-                    <td>{task.description}</td>
-                    <td>{task.status ? 'DONE' : 'NOT DONE'}</td>
-                    <td>
-                        <input type="button" value="X" className="btn btn-primary"
-                               onClick={() => this.props.delTask(task)}
-                        />
-                    </td>
-                    <td>
-                        <input type="checkbox"
-                               defaultChecked={task.status}
-                               onClick={() => this.props.changeStatus(task)}
-                        />
-                    </td>
-                </tr>
-
-            );
-        });
-    }
-
-    render() {
-        return (
-            <table className="table table-hover table-bordered">
-                <tbody>
-                <tr>
-                    <th>Name</th>
-                    <th>Created</th>
-                    <th>Last Modified</th>
-                    <th>Description</th>
-                    <th>Status</th>
-                </tr>
-
-                {this.createTableRows()}
-                </tbody>
-            </table>
-        );
-    }
-}
-
-
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
     return {
-        todos: state.todos
+        tasksList: state.tasks.tasksList
     };
 }
-function matchDispatchToProps(dispatch) {
-    return bindActionCreators({delTask: delTask,changeStatus: changeStatus}, dispatch);
+const matchDispatchToProps = (dispatch) => {
+    return {
+        fetchTasks: () => {
+            dispatch(fetchTasks()).then((response) => {
+
+                !response.error ? dispatch(fetchTasksSuccess(response.payload.data)) : dispatch(fetchTasksFailure(response.payload.data));
+            })
+        }
+
+    }
 
 }
 export default connect(mapStateToProps, matchDispatchToProps)(ToDoList);

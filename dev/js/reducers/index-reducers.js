@@ -8,7 +8,7 @@ import {combineReducers} from 'redux';
 import ToDoList from './to-do-list-reducer';
 
 const allReducers = combineReducers({
-    todos: ToDoList
+    tasks: ToDoList
 });
 
 export default allReducers;
