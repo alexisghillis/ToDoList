@@ -30,6 +30,19 @@ export function fetchTasks() {
     };
 }
 
+export function changeStatus() {
+    const request = axios({
+        method: 'get',
+        url: `${ROOT_URL}`,
+        headers: []
+    });
+
+    return {
+        type: CHANGE_STATUS_KEY,
+        payload: request
+    };
+}
+
 export function fetchTasksSuccess(tasks) {
     return {
         type: FETCH_TASKS_SUCCESS,
