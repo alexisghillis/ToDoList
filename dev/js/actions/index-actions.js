@@ -5,22 +5,22 @@
 import axios from 'axios';
 
 
+import {DELETE_TASK, DELETE_TASK_SUCCESS, DELETE_TASK_FAILURE} from '../constants.js'
+
+import {FETCH_TASKS, FETCH_TASKS_SUCCESS, FETCH_TASKS_FAILURE} from '../constants.js'
+
+import {CHANGE_STATUS, CHANGE_STATUS_SUCCESS, CHANGE_STATUS_FAILURE} from '../constants.js'
+
+import {ADD_TASK, ADD_TASK_SUCCESS, ADD_TASK_FAILURE} from '../constants.js'
 
 
-import {DELETE_KEY} from '../constants.js'
-import {CHANGE_STATUS_KEY} from '../constants.js'
-import {ADD_TASK} from '../constants.js'
-import {add2doClasses} from '../constants.js'
-import {FETCH_TASKS} from '../constants.js'
-import {FETCH_TASKS_SUCCESS} from '../constants.js'
-import {FETCH_TASKS_FAILURE} from '../constants.js'
+const ROOT_URL = 'http://localhost:8080';
 
-
-const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:8080/task' : '/task';
+//fetch task list
 export function fetchTasks() {
     const request = axios({
         method: 'get',
-        url: `${ROOT_URL}`,
+        url: `${ROOT_URL}/task`,
         headers: []
     });
 
@@ -30,20 +30,8 @@ export function fetchTasks() {
     };
 }
 
-export function changeStatus() {
-    const request = axios({
-        method: 'get',
-        url: `${ROOT_URL}`,
-        headers: []
-    });
-
-    return {
-        type: CHANGE_STATUS_KEY,
-        payload: request
-    };
-}
-
 export function fetchTasksSuccess(tasks) {
+
     return {
         type: FETCH_TASKS_SUCCESS,
         payload: tasks
@@ -56,41 +44,94 @@ export function fetchTasksFailure(error) {
         payload: error
     };
 }
-//-------------------TO DO
-export const changeStatus = (task) => {
-    console.log("Changed status for task named: ", task.name);
+
+//delete task
+export const delTask = (id) => {
+    const request = axios({
+        method: 'delete',
+        url: `${ROOT_URL}/task/${id}`,
+        headers: []
+    });
+
     return {
-        type: CHANGE_STATUS_KEY,
-        payload: task
+        type: DELETE_TASK,
+        payload: request
     }
 };
 
-export const delTask = (task) => {
-    //console.log("Deleted task named: ",task.name);
+export function delTaskSuccess(deletedTask) {
+    window.location.reload(true);
     return {
-        type: DELETE_KEY,
-        payload: task
-    }
-};
+        type: DELETE_TASK_SUCCESS,
+        payload: deletedTask
+    };
+}
 
-export const addTask = () => {
+export function delTaskFailure(response) {
+    return {
+        type: DELETE_TASK_FAILURE,
+        payload: response
+    };
+}
+
+//change task status
+export function changeStatus(id, status) {
+
+    const request = axios({
+        method: 'put',
+        url: `${ROOT_URL}/task/${id}`,
+        headers: [],
+        data: {
+            status
+        }
+    });
+
+    return {
+        type: CHANGE_STATUS,
+        payload: request
+    };
+}
+
+export function changeStatusSuccess(changedTask) {
+    window.location.reload(true);
+    return {
+        type: CHANGE_STATUS_SUCCESS,
+        payload: changedTask
+    };
+}
+
+export function changeStatusFailure(response) {
+    return {
+        type: CHANGE_STATUS_FAILURE,
+        payload: response
+    };
+}
+
+export function addTask(task) {
+    const request = axios({
+        method: 'post',
+        data: task,
+        url: `${ROOT_URL}/task`
+    });
+
     return {
         type: ADD_TASK,
-        payload: () => {
-            var item = {};
+        payload: request
+    };
+}
 
-            var taskName = document.querySelector(add2doClasses[0]).value;
-            var taskDescription = document.querySelector(add2doClasses[1]).value;
+export function addTaskSuccess(newTask) {
+    return {
+        type: ADD_TASK_SUCCESS,
+        payload: newTask
+    };
+}
 
-            item["id"] = "666";
-            item["name"] = taskName;
-            item["created"] = "11/27/2016";
-            item["modified"] = "11/12/2016";
-            item["description"] = taskDescription;
-            item["status"] = "ceva de test";
+export function addTaskFailure(error) {
+    return {
+        type: ADD_TASK_FAILURE,
+        payload: error
+    };
+}
 
-            return item;
-        }
-    }
-};
 

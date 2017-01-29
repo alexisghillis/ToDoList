@@ -2,11 +2,12 @@
  * Created by alexis-toma.ghillis on 1/18/2017.
  */
 
-import React from 'react';
+import React, {Component,PropTypes} from 'react';
 import { Link } from 'react-router'
-import {addTask} from '../actions/index-actions';
+import {add2doClasses} from '../constants'
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 
-//-----TO DO
 class AddToDo extends React.Component {
     render(){
         return (
@@ -38,7 +39,7 @@ class AddToDo extends React.Component {
                         <Link to="/"><input type="button" className="btn btn-primary" value="Cancel"/></Link>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="button" className="btn btn-primary" value="Save"
-                               onClick={() =>{addTask()}} />
+                               onClick={() => {this.props.addTask(createNewTask.payload)}} />
                     </td>
                 </tr>
                 </tbody>
@@ -48,3 +49,23 @@ class AddToDo extends React.Component {
 }
 
 export default AddToDo;
+
+export const createNewTask = () => {
+    return {
+        payload: () => {
+            var item = {};
+
+            var taskName = document.querySelector(add2doClasses[0]).value;
+            var taskDescription = document.querySelector(add2doClasses[1]).value;
+
+            item["id"] = "666";
+            item["name"] = taskName;
+            item["created"] = "11/27/2016";
+            item["modified"] = "11/12/2016";
+            item["description"] = taskDescription;
+            item["status"] = "ceva de test";
+
+            return item;
+        }
+    }
+};

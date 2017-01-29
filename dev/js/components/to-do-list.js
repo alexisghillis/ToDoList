@@ -1,11 +1,9 @@
 /**
  * Created by alexis-toma.ghillis on 1/25/2017.
  */
-import React, {Component} from 'react';
+import React, {Component,PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {delTask} from '../actions/index-actions';
-import {changeStatus} from '../actions/index-actions';
 
 class ToDoList extends Component {
 
@@ -27,19 +25,21 @@ class ToDoList extends Component {
                     <td>{task.status}</td>
                     <td>
                         <input type="button" value="X" className="btn btn-primary"
-                              // onClick={() => this.props.delTask(task)}
+                              onClick={() => {
+                                  this.props.delTask(task.id);
+                              }}
                         />
                     </td>
                     <td>
                         <input type="checkbox"
-                               defaultChecked={task.status}
-                               onClick={() => this.props.changeStatus(task)}
+                               defaultChecked={task.status.localeCompare("DONE") == 0}
+                               onClick={() => this.props.changeStatus(task.id,task.status.localeCompare("DONE") == 0 ? "NOT DONE" : "DONE" )}
                         />
                     </td>
                 </tr>
 
             );
-        });
+        })
     }
 
     render() {
