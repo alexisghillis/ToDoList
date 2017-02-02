@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux'
 import allReducers from './reducers/index-reducers';
 import TaskList from './components/index-to-do-list-component';
-import AddToDo  from './components/add-to-do-component';
+import AddToDo  from './containers/add-to-do-container';
 import { Router, Route, browserHistory } from 'react-router'
 import promise from 'redux-promise';
 

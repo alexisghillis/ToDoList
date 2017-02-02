@@ -2,9 +2,6 @@
  * Created by alexis-toma.ghillis on 1/18/2017.
  */
 
-
-export const add2doClasses = ["input.form-control","textarea.form-control"];
-
 //fetch task list
 export const FETCH_TASKS = 'FETCH_TASKS';
 export const FETCH_TASKS_SUCCESS = 'FETCH_TASKS_SUCCESS';

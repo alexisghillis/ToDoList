@@ -60,7 +60,6 @@ export const delTask = (id) => {
 };
 
 export function delTaskSuccess(deletedTask) {
-    window.location.reload(true);
     return {
         type: DELETE_TASK_SUCCESS,
         payload: deletedTask
@@ -93,7 +92,6 @@ export function changeStatus(id, status) {
 }
 
 export function changeStatusSuccess(changedTask) {
-    window.location.reload(true);
     return {
         type: CHANGE_STATUS_SUCCESS,
         payload: changedTask
@@ -111,7 +109,10 @@ export function addTask(task) {
     const request = axios({
         method: 'post',
         data: task,
-        url: `${ROOT_URL}/task`
+        url: `${ROOT_URL}/task`,
+        headers: {
+            "Content-Type": "application/json"
+        }
     });
 
     return {
